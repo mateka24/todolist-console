@@ -1,4 +1,19 @@
+import json
+import os
+
 tasks = []
+
+def save_tasks(filename="tasks.json"):
+    with open(filename, "w", encoding="utf-8") as f:
+        json.dump(tasks, f, ensure_ascii=False, indent=4)
+
+def load_tasks(filename="tasks.json"):
+    global tasks
+    if os.path.exists(filename):
+        with open(filename, "r", encoding="utf-8") as f:
+            tasks = json.load(f)
+    else:
+        tasks = []
 
 def show_menu():
     print("\nМеню:")
@@ -11,6 +26,7 @@ def show_menu():
 def add_task():
     title = input("Введите задачу: ")
     tasks.append({"title": title, "done": False})
+    save_tasks()
     print("Задача добавлена.")
 
 def show_tasks():
@@ -27,6 +43,7 @@ def mark_done():
         idx = int(input("Введите номер выполненной задачи: ")) - 1
         if 0 <= idx < len(tasks):
             tasks[idx]["done"] = True
+            save_tasks()
             print("Задача отмечена как выполненная.")
         else:
             print("Некорректный номер задачи.")
@@ -39,11 +56,15 @@ def delete_task():
         idx = int(input("Введите номер задачи для удаления: ")) - 1
         if 0 <= idx < len(tasks):
             tasks.pop(idx)
+            save_tasks()
             print("Задача удалена.")
         else:
             print("Некорректный номер задачи.")
     except ValueError:
         print("Ошибка ввода. Введите номер задачи.")
+
+# Загружаем задачи при запуске программы
+load_tasks()
 
 while True:
     show_menu()
