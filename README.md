@@ -52,4 +52,4 @@ python main.py
 
 ## Ссылка на репозиторий
 
-[https://github.com/ТВОЙ_ЛОГИН/todolist-console](https://github.com/ТВОЙ_ЛОГИН/todolist-console)
+[https://github.com/mateka24/todolist-console](https://github.com/mateka24/todolist-console)
